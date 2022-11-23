@@ -61,14 +61,17 @@ Nesnelerin değeri basic guarantee de değişmiş olabilir ancak geçersiz olama
 Strong Guarantee
 ---------------
 Fonksiyon expception throw ederse, fonksyion çağrılmadan önceki state ne ise o durum sağlanacak. Bu garanti zaten basic garantinin
-verdiklerini verip bir de üstüne programın state ini koruma garantisi veriyor.
+verdiklerini verip bir de üstüne programın stateini koruma garantisi veriyor.
 STD librarynin bir çok sonkyionu strong guarantee veriyor.
 Buradaki garantiye commit or rollback te deniyor aynı zamanda.
 Bundan ya iş yapılmış halde çıkılacak yada exception oluşursa, bu fonksyion
-çağrılmadan önceki nesnenin state i ne ise ona dönülür.
+çağrılmadan önceki nesnenin statei ne ise ona dönülür.
  - Programın durumu değişemez
  - Commit or rollback yani ya işini yapacak ya da eski state e geri dönecek
  - Program tutarlı bir durumda kalacak 
+
+commit or rollback guarantee tipik olarak şöyle veriliyor. Garanti veren fonksiyon işini yapmadan önce etkilenecek nesneleri geçici bir bellek alanına kopyalıyor.
+Ardından yapmak istediği işlemleri yapıyor. Hata alırsa kopyaladığı kullanarak programı önceki durumuna geri getiriyor. 
  
  Strong, Basic ten daha maliyetli.
 Nothrow Guarantee
@@ -123,6 +126,17 @@ destruvtor içerisinde exception throw etmemek gerekir.
 
 otomatik ömürlü nesnelerde destructorlar çağrılsa da dinamik ömürlü nesneler için böyle bir durum yoktur. Dolayısıyla dinamik ömrülü nesnelerde hata durumunda kaynak sızıntısı olabilir.
 dinamik ömürlü nesnelerde kaynak sızıntısını önlemek için RAII idiomu veya smart poninterlar kullanılabilir.
+
+Constructor içerisinde hata oluştuğu zaman bu hatayı bildirmek için en uygun yol exception throw etmektir. 
+destructor içinde exception throw edilmemesi gerekmektedir. Zaten 20 standatları ile beraber destructorlar belirtilse de belirtilmese de otomatik olarak noexcept tanımlanmaktadır. 
+
+derleyici kod yazarken uygun görürse constructorlara noexcept yapabilir
+
+Bir constructor function try blok içerisine alınırsa (bkz. function_try_block.cpp) memberlardan gönderilen hataları yakalayabilir.
+function try blok içerisindeki constructor hata yakalnırsa otomatik rethrow ediliyor. 
+
+Bir fonksiyon çağrıldığında bir kaynak ediniliyor ve bu exception yakalandığı zaman bu kaynak geri verilmiyorsa burada resource leak yani kaynak sızıntısı vardır. 
+Kaynak sızıntısı olan programlar exception safe değildir. 
 
 */
 
