@@ -130,7 +130,8 @@ dinamik ömürlü nesnelerde kaynak sızıntısını önlemek için RAII idiomu 
 Constructor içerisinde hata oluştuğu zaman bu hatayı bildirmek için en uygun yol exception throw etmektir. 
 destructor içinde exception throw edilmemesi gerekmektedir. Zaten 20 standatları ile beraber destructorlar belirtilse de belirtilmese de otomatik olarak noexcept tanımlanmaktadır. 
 
-derleyici kod yazarken uygun görürse constructorlara noexcept yapabilir
+derleyici kod yazarken uygun görürse kendi yazdığı special member functionlara constructorlara noexcept yapabilir
+Eğer special function memeber'ları programcı yazıyorsak noexcept garantisinden programcı sorumlu. Ancak default edilirse derleyici yine karar verecektir.
 
 Bir constructor function try blok içerisine alınırsa (bkz. function_try_block.cpp) memberlardan gönderilen hataları yakalayabilir.
 function try blok içerisindeki constructor hata yakalnırsa otomatik rethrow ediliyor. 
