@@ -85,7 +85,7 @@ Bu tablo içerisinde bir index type_info türünden nesne adresi için tutuluyor
 dynamic_cast ile tür bilgisi elde edilirken programın maliyeti, typeid'ye göre daha fazla olabilir. Çünkü tüm taban sınıfılara bakıyor. Typeid operatörü sadece bir tane typeinfo nesnesine bakıyor.
 */
 
-#include<iostream>
+#include <iostream>
 
 class Car
 {
@@ -95,43 +95,139 @@ class Car
         std::cout<<"Car \n";
      }
 
+
 };
 
 class Audi : public Car
 {
     public:
-     virtual void func() override
+     void func() override
     {
         std::cout<<"Audi\n";
     }
 };
 
-
+class base {
+public:
+    virtual void print()
+    {
+        std::cout << "print base class\n";
+    }
+  
+    void show()
+    {
+        std::cout << "show base class\n";
+    }
+};
+  
+class derived : public base {
+public:
+    void print()
+    {
+        std::cout << "print derived class\n";
+    }
+  
+    void show()
+    {
+        std::cout << "show derived class\n";
+    }
+};
+  
 int main()
 {
+    base *b = new derived();
 
+    derived * d = dynamic_cast<derived*>(b);
 
-Car car;
-Audi * ap = dynamic_cast<Audi*>(&car);
-car.func();
-
-if(ap != nullptr)
-    ap->func();
-
-
-if(typeid(Car) == typeid(car))
-{
-    std::cout<<&car<<": is Car\n";
-}
-
-
-if(typeid(Car) == typeid(ap))
-{
-    std::cout<<&car<<": is Car\n";
-}
-
-std::cout<<typeid(*ap).name()<<"\n";
+    b->print();
+    b->show();
 
     
-return 0;
+if(d != nullptr)
+{
+    d->print();
+    d->show();
 }
+
+std::cout<<"typename b : "<<typeid(b).name()<<"\n";
+std::cout<<"typename d: "<<typeid(d).name()<<"\n";
+
+std::cout<<"typename *b : "<<typeid(*b).name()<<"\n";
+std::cout<<"typename *d: "<<typeid(*d).name()<<"\n";
+
+
+
+if(typeid(base) == typeid(*b))
+{
+    std::cout<<"b*: is base\n";
+}
+
+if(typeid(derived) == typeid(*b))
+{
+    std::cout<<"b*: is derived\n";
+}
+
+if(typeid(base) == typeid(*d))
+{
+    std::cout<<"d*: is base\n";
+}
+
+if(typeid(derived) == typeid(*d))
+{
+    std::cout<<"d*: is derived\n";
+}
+
+if(typeid(*b) == typeid(*d))
+{
+    std::cout<<"d* == b*\n";
+}
+
+
+if(typeid(base*) == typeid(b))
+{
+    std::cout<<"b: is base*\n";
+}
+
+if(typeid(derived*) == typeid(b))
+{
+    std::cout<<"b: is derived*\n";
+}
+
+if(typeid(base*) == typeid(d))
+{
+    std::cout<<"d: is base*\n";
+}
+
+if(typeid(derived*) == typeid(d))
+{
+    std::cout<<"d: is derived*\n";
+}
+
+if(typeid(b) == typeid(d))
+{
+    std::cout<<"d == b\n";
+}
+
+/*
+OUTPUT
+---------------
+print derived class
+show base class
+print derived class
+show derived class
+typename b : P4base
+typename d: P7derived
+typename *b : 7derived
+typename *d: 7derived
+b*: is derived
+d*: is derived
+d* == b*
+b: is base*
+d: is derived*
+
+*/
+    
+    return 0;
+}
+
+
