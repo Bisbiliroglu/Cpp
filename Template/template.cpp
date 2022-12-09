@@ -95,4 +95,97 @@ template <typename T, size_t size> birincisi tür ikincisi boyut olarak kullanı
 struct array{
 };
 
+
+Template specialization, template'den üretilen sınıfın adı.
+
+Explicit Specializaiton
+-------------------------
+Explicit specialization, öyle bir kod ki belirli template argümanı ya da argümanları için derleyicinin bir specialization oluşturması yerine biim sağladığımız kodun (specialization) kullanılması talimatıdır.
+Explicait specialization diğer adı full specialization.
+Hem fonksiyon hem de sınıf şablonlarında kullanılabiliyor ancak daha çok sınıf şablonlarında kullanılıyor. 
+Kullanım Amacı:
+Oluşturulan template, bir çok tür için verilen şablona göre istenilen kodu döndürüyor ancak bazı türler için daha özelleştirilmiş bir çözüm isteniyorsa kullanılıyor.
+
+template <typename t>
+T getmax(T x, T y)
+{
+	return x>y?x:y;
+}
+
+int main()
+{
+	std::cout<<getmax(10,20);
+	std::cout<<getmax(3.85, 4.2);
+	std::cout<<getmax("abc","defg");
+	std::cout<<getmax("defg","abc");
+
+	OUTPUT
+	--------
+	20
+	4.2
+	abc
+	defg
+
+	son iki örnekte string literali const char * geliyor. 
+	Dolayısıyla stringler değil adresler karşılaştırılmış oluyor ve yanlış sonuç ortaya çıkıyor.
+}
+
+
+Partial Specialization,
+Explicit specialization'dan farklı olarak bir tür tipi için değil, belirli bir gruptaki tür tipleri için ayrı bir specialization partial specialization ile verilir.
+
+Not: Function template ile partial specializationk kullanılamıyor sadece class template ile kullanılabiliyor.
+
+SENTAKS
+-------
+template<typename T>
+class MyClass{
+
+}
+template<typename T>
+class MyClass<T*>{ // pointer türleri için bu specialization kullanılacak
+	
+}
+
+
+DEFAULT TEMPLATE ARGUMENT
+-------------------------
+Template parametreleri için default argüman sağlanmasıdır. 
+Eğer template argümanında explicit bir argüman kullanılmamışsa default olarak verilen argüman kullanılacak.
+
+
+SENTAKS
+-------
+template <typename T = type>
+void func(T)
+
+
+default argument yerine başka bir türe air template parametresi kullnılabilir. 
+
+template<typename = std::pair(int,double)
+
+template<typnema T ,typename U=T>
+
+STL container sınıfı templatelerin biri hariç hepsi default argüment alır.  
+
+template<typename T typename A = std::allocator<T>>
+class Vector
+{
+	...
+}
+
+Vector<int> vec;
+Vector<int , std::allocator<int>> vec;
+
+ikiside aynı
+
+//allocator dinamik bellek ihtiyacını karşılamak ve yönetmek için kullanılan bir tür
+
+templatelerde fonksiyonlarda olduğu gibi bir parametre varsayılan argüman aldığı zaman, bu parametrenin sağındaki tüm parametrelerinde varsayılan argüman alması gerekir.
+tüm template argüman tipleri (1. type parameter, 2. non-type parameter 3. template template argument parameter) default argument alabilir.
+template <typename T = int, int a = 5>;
+
+Not: Modern C++ öncesinde sadece sınıf şablonları varsayılan argüman alabilirdi. Fonksiyon şablonlarının varsayılan argüman alması daha sonra eklendi. 
+
+
 */

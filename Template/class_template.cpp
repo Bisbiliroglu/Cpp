@@ -146,6 +146,8 @@ Class template içerisinde farklı template argğmana sahip member template kull
 
 Eğer template sınıf içerisinde kullanılan member template fonksiyonun parametresi && yapılırsa UNIVERSAL REFERENCE diğer ismiyle FORWARDING REFERENCE olur.
 
+
+Bir sınıfın static veri elemanı ile sınıf şablonunun static veri elemanı karıştırılmamalıdır. template kullanılarak üretilen ehr sınıfın static elemanı kendi static elemanıdır. 
 */
 
 #include<iostream>
