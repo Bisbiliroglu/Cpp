@@ -89,12 +89,15 @@ Reverse Iteratör
 -------------------
 reverse iteratör sınıfları begin ve end normal iteratör sınıflarına göre çapraz gibi düşünülebilir. ++ operatörü ise normal iteratörlerin -- operatörü ile benzer çalışır. 
 reverse iteratör sınıfları dereference edilirse bir önceki değeri dereference eder. dolayısıyla rbegin dereference edilirse container'ın son ögesi, rend dereference edilirse ise beginden bir önceki değer dereference edilir. 
-rend fonksiyonu end fonksiyonu gibi dereference edilirse undefined behavoir.
+rend fonksiyonu end fonksiyonu gibi dereference edilirse undefined behavior.
 reverse iteratörlerin base isimli bir sınıfı vardır. Bu sınıf iteratörün sarmaladığı sınıfı döndürür. 
 
 begin = rend.base()
 end = rbegin.base()
 
+reverse iteratörlerin ve normal iteratörlerin türü birbirinden farklıdır.  
+reeverse iteratör normal iteratöre dönüştürmek için .base() fonksiyonu çağrılabilir. Ancak bu durumda rever iteratörün 1 sonraki ögeyi tuttuğunu unutmamak gerekir. 
+reverse_iter.base() - 1
 
 
 ITERATOR CATEGORY
@@ -187,6 +190,107 @@ numeric
 Bu başlık dosyasındaki algoritmalar tipik olarak bir range alıyor.
 Her algoritma her iteratör kategörisini kabul etmiyor. Farklı algoritmalar farklı iteratör kategorisi istiyor. 
 
+
+ITERATORLER VE CONST CORRECTNES
+-------------------------------
+
+int a = 10;
+int * const p = a; // top level const or right const
+*p = 56; *p değiştirilebilir. ancak p başka değere atanamaz
+const int * p = a; // low level const, left const
+*p = 56; hata verir. ancak p =&b olabilir. 
+
+
+vector<int> ivec {0,1,2,3,4,5};
+
+const vector<int>::iterator iter = ivec.begin();
+veya
+vector<int>::iterator const iter = ivec.begin();
+
+const bir nesne olduğu için bu sınıfın sadece const üyeleri çağrılabilir.
+yazılan iteratör hayatı boyunca hep aynı nesnenin konumunu tutar. 
+Tıpkı top level const gibi.
+
+++iter; hata verir.
+*iter = 45; hata vermez.
+
+Low level const gibi saft okuma amaçlı kullanılabilen iteratör için const iteratörler kullanılması gerekiyor. 
+
+ vector<int>::const_iterator iter = ivec.begin();
+ ++citer; // hata vermez
+ *citer = 45; //hata verir
+
+
+ auto iter  = ivec.begin();
+ auto citer = ivec.cbegin();
+
+
+ citer = iter; sentaks hatası yok implicit convertion oluyor.
+ iter = viter; sentaks hatası. 
+
+
+CONST ITERATOR
+--------------
+Low level const gibi salt okuma amaçlı kullanılabilen iteratörlerdir. 
+
+ vector<int>::const_iterator iter = ivec.begin();
+ ++citer; // hata vermez
+ *citer = 45; //hata verir
+
+Örnek olarka bir range içerisinde yazma yapmadan dolaşmak için const iteratörler kullanılıyor. 
+
+const iteratörlere erişmek için containerların cbegin(), cend() gibi fonksiyonlar kullanılabilir. 
+
+ITERATOR MANIPULATION FUNCTIONS
+--------------------------------
+advance
+-------
+Bir iteratörü N position ilerletiyor.
+
+advance(iter, N);
+
+Eğer iteratör bidirectional iteratör türünden ise advance fonksiyonu negatif sayılar argüman olarak girilerek geri gitmesi sağlanabilir. 
+
+distance
+--------
+İki iteratörün farkını verir. 
+
+index_diff = distance(iter1, iter2);
+
+iter1, iter2 den önceki bir pozisyon olmak zorunda. Diğer durumda undefined beheavoir.
+
+next (C++ 11 ile geldi) 
+----
+new_iter next(iter, N = 1)
+
+next fonksiyona girilen iteratör (L calue ya da R value olabilir) girilen N sayısı kadar iletletilerek aynı türde yeni iteratör döndürür.
+
+Not: advance sadece L value reference alıp onu ilerletir. 
+
+Elde edilecek iteratör konumunun geçerli bir konum olmasından geliştirici sorumludur. Taşırma durumunda undefined behavior oluşur.
+
+prev (C++ 11 ile geldi)
+----
+new_iter prev(iter, N = 1)
+
+prev fonksiyona girilen iteratör (L calue ya da R value olabilir) girilen N sayısı kadar geriletilerek aynı türde yeni iteratör döndürür.
+
+Not: advance sadece L value reference alıp onu ilerletir. 
+
+Elde edilecek iteratör konumunun geçerli bir konum olmasından geliştirici sorumludur. Taşırma durumunda undefined behavior oluşur.
+
+iter_swap
+---------
+swap ve iter_swap birbiriyle karıştırılmamalıdır. swap iki nesneyi birbiryle değiştiren fonksiyon şablonudur. 
+iteratör nesneleri de diğer tüm nesneler gibi swap fonksiyonu ile değiştirilebilir. 
+
+Ancak iteratörlerin kendisini değil, gösterdiği ögeleri değiştirmek istenirse iter_swap kullanılabilir.
+
+iter_swap(iter1, iter2)
+
+not: const iteratör iter_swap ile kullanılamaz. 
+
+swap(iter1*, iter2*) = iter_swap(iter1, iter2) != swap(iter1, iter2) //fonksiyon davranışı olarak
 
 
 ALGORITHMS
