@@ -292,6 +292,10 @@ not: const iteratör iter_swap ile kullanılamaz.
 
 swap(iter1*, iter2*) = iter_swap(iter1, iter2) != swap(iter1, iter2) //fonksiyon davranışı olarak
 
+iter_swap farklı türlerdeki iteratörleri de değiştirebilir. ör bir list ve bir vectorun ögeleri değiştirilebilir.  
+
+back_inster(), fron_insrter ve inserter() fonksiyonları ile oluşturulan iteratörler ile boş conteiner dosyalarına yenş eleman girişi yapılabilir.
+
 
 ALGORITHMS
 =========
@@ -302,6 +306,8 @@ Conventions
  1.) Belirli bir range yazan algoritmalar (ör copy) en son yazdıkları konumadan bir sonraki konumu döndürürler. 
  2.) Parametrelerde kaynak range önce, hedef range sonra olur.
  3.) Arama algoritmaları konum döndürmektedir. Bulursa bulduğu konumu bulamazsa end konumunu döndürmektedir. 
+ 4.) Alogritmalar girilen iteratörlere göre işlem yaptığı konuma eleman ekleyemez veya eleman silemezler. Zaten iteratörden container'ın kendisine erişelemeyeceği için bu işlem mümkün değildir. 
+
 
 
 

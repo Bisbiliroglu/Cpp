@@ -122,6 +122,21 @@ void print_variadic(const Ts& ...args)
     (void)std::initializer_list<int> {(std::cout<< args<<" ", 0)... }; 
 }
 
+
+
+template <typename T>
+constexpr bool EQ(T)
+{
+    return true ;
+}
+
+
+template <typename T, typename ...Ts>
+constexpr bool EQ(T a, T b, Ts ... args)
+{
+    return (a ==  b ) && EQ(b,args...);
+}
+
 int main()
 {
     Myclass<int> c1;
