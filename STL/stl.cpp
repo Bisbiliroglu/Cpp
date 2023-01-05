@@ -164,6 +164,27 @@ insert fonksiyonları geri dönüş değeri olarak insert edilen ilk ögenin de�
 vectordeki ilk ögenin adresini elde etmek için data fonksiyonu kulanılabilir. Vector array gibi art arda belekte sıralandığı için C array isteyen C fonksiyonlarına bu değer gnderilebilir.
 
 
+Emplace Fonksiyonları
+---------------------
+Container'lara ekleme işlemi yaparken, copy veya move constructor kullanmak yerine, perfect forwarding ile container'da tutulacak nesnenin constructoru için argümanları geçilmesi işlemi. 
+
+vec.pushback(Date{}) // default ctor + move ctor  çağrılıyor
+vec.emplace_back(); //default ctor çağrılıyor. 
+
+push_back => emplace_back
+push_front => emplace_front
+insert => emplace 
+
+çağrılabiliyorsa her zaman emplace fonksiyonlarını çağırmakta fayda var. Emplace fonksiyonları ya aynı maliyete ya da daha az maliyete sahip.
+
+Date mudate; //default ctor
+
+vec.push_back(mydate) //copy ctor
+vec.emplace_back(mydate) //copy ctor 
+
+aynı maliyetteler. 
+
+
 ITERATORS
 =========
 iteratorler pointerların daha soyutlanmış hali. Containerlerın için konum tutan bir nesne. 
@@ -393,6 +414,8 @@ swap(iter1*, iter2*) = iter_swap(iter1, iter2) != swap(iter1, iter2) //fonksiyon
 iter_swap farklı türlerdeki iteratörleri de değiştirebilir. ör bir list ve bir vectorun ögeleri değiştirilebilir.  
 
 back_inster(), fron_insrter ve inserter() fonksiyonları ile oluşturulan iteratörler ile boş conteiner dosyalarına yenş eleman girişi yapılabilir.
+
+
 
 
 ALGORITHMS
