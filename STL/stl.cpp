@@ -428,7 +428,7 @@ Conventions
  2.) Parametrelerde kaynak range önce, hedef range sonra olur.
  3.) Arama algoritmaları konum döndürmektedir. Bulursa bulduğu konumu bulamazsa end konumunu döndürmektedir. 
  4.) Alogritmalar girilen iteratörlere göre işlem yaptığı konuma eleman ekleyemez veya eleman silemezler. Zaten iteratörden container'ın kendisine erişelemeyeceği için bu işlem mümkün değildir. 
-
+ 5.) Sonunda copy olan algoritmalar, işlemini yaptıkran sonra sonucu başka bir yere kopyalıyor.  
 
 
 
