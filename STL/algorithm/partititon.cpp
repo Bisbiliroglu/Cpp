@@ -25,7 +25,7 @@ SENTAKS
 iter partition(beg, end, u_pred)
 
 
-partition_copy
+partititon_copy
 --------------
 Koşulu sağlayanları bir range, sağlamayanları başka range yazıyor.
 
@@ -38,6 +38,8 @@ true_iter: koşulu sağlayanların yazılacağı range başlangıcı
 false_iter: koşulu sağlamayanların yazılacağı range başlangıcı
 
 
+is_partititoned
+---------------
 
 */
 
