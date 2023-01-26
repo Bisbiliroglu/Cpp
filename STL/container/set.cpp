@@ -59,6 +59,7 @@ equal range
 lower bound ile upper bound arasındaki range.
 equal range 'in distance o anahtardan kaç tane olduğunun sayısıdır. 
 
+bir set başka bir sete (aynı türden ) merge edilebilir. bunun için merge fonksiyonu kullanılıyor.
 
 */
 
