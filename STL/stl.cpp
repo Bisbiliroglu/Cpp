@@ -51,10 +51,14 @@ Ekleme işlemi belirli bir konum değil değerle yapılıyor.
 İkili arama ağacı veri yapısı kullanılıyor. Değerin ne olduğuna bağlı olarak ekleneceği yer belirleniyor.
 Log N karmaşıklığa sahiptir. 
 
-std::set	    -> Sadece anahtar tutuyor.Tamsayıların setini oluşturursak 17 nin sette olup olmadığını sorgulayabiliriz.Bir anahtardan bir tane var.
-std::multiset	-> Bir anahtardan birden fazla olabilir.Tamsayıların setinde 1 tane 12 olabilir.multisetinde 3,4,5,6 tane 12 olabilir.
+std::set	    -> Sadece anahtar tutuyor.Tamsayıların setini oluşturursak 17 nin sette olup olmadığını sorgulayabiliriz.Bir anahtardan bir tane var. ekleme, arama ve silme O(log(n))
+std::multiset	-> Bir anahtardan birden fazla olabilir.Tamsayıların setinde 1 tane 12 olabilir.multisetinde 3,4,5,6 tane 12 olabilir. ekleme, arama ve silme O(log(n))
 std::map	    -> Anahtarın değerle eşlendiği veri yapısı.Anahtarla erişiyoruz yine ama anahtar karşılığı bir değere erişiyoruz.Buradakiler pair gibi anahtar değer çifti
 std::multimap	-> Bir anahtardan birden fazla olabilir.
+
+Tipik olarak var mı yok mu sorgulaması yapılacaksa set grubu, varsa ona eşlenmiş bilgilere erişmek için map grubu kullanılabilir. 
+Arama, ekleme işlemleri için bir karşılaştırma yapılması gerekiyor. ancak bu karşılaştırma == ile yapılmıyor. tipik olarak less (<) kullanılıyor. 
+Örnek arama yapmak için karşılaştırma işleminde !(a<b) && !(b<a) kullanılıyor. buna equivalence deniliyor. 
 
 UNORDERED ASSOCIATIVE CONTAINERS
 --------------------------------
@@ -69,6 +73,8 @@ std::unordered_multimap		-> (C++ 11 de geldi) Bir anahtardan birden fazla olabil
 Not: stack, queue, priority_queue container değil container adaptor olarak geçiyor.
 
 Boost içinde STL'den daha fazla container var. Örnek olarak graph veya binary map verilebilir. 
+
+sequence continerlarda ekleme belirli bir sıra ile yapılıyor. associative continerlarda ise geliştirici eklenecek yeri değil sırayı veriyor. arkada bir karşılaştırma işlemi ypaılarak ekleme yapılıyor. 
 
 
 Eklene İşlemi

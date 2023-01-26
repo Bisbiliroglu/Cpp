@@ -21,7 +21,7 @@ insert fonksiyonu yok insert_after var.
 
 erase fonksiyonu yok erase_after var.
 
-begin fonksiyonu yok begin_before var. 
+begin fonksiyonu yanı sıra başa ekeleme işlemleri için before_begin var. 
 
 push_front fonksiyonu ile başa ekleme yapılabilir. 
 
