@@ -64,6 +64,30 @@ SENTEKAS
 --------
 iter is_sorted_until(beg, end, b_predic = less);
 
+
+SET (Küme) Algoritmaları
+--------------------------
+bazı sıralandırıma algoritmaları küme işlemleri yapıyorlar. Bunlar;
+
+set_intersection : kesişim 
+set_union : birleşim
+set_difference : fark
+set_symetric_difference: a ve b kümelerinden a da olan b de olmayanlar ile b de olan a da olmayanların birleşim kümesi.(A - B) U (B - A)
+
+bu algoritmaların hepsi için 3 tane iteratör typı var.
+
+set_* (src.begin(), src.end(), dest.begin(), dest.end(), third_cap.begin(), pred = less )
+
+kullanılan tüm containerlar sıralı olması gerekiyor. Bu sıralamanın ise pred ile aynı olması gerkeiyor. 
+
+
+merge
+-----
+
+less ile sıralanmış iki containerı birleştiriyor. 
+
+merge(first.begin(), first.end(), second.begin(),second.end(), dest.begin())
+
 */
 
 #include <iostream>
