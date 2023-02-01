@@ -191,6 +191,31 @@ vec.emplace_back(mydate) //copy ctor
 aynı maliyetteler. 
 
 
+CONTAINER ADAPTORSS
+===================
+STL kütüphanesinde 3 tane container adaptor bulunmakta
+std::stack
+std::queue
+std::priority_queue
+
+Bu adaptörler bir containerı member olarak alıyorlar ve bu containerı kullanarak farklı veri yapılarını implemente ediyorlar. 
+Tüm adaptörler generic olarak implemente edilmiştir. 
+
+STACK 
+-----
+Son girenin ilk çıktığı veri yapısı (LIFO)
+
+QUEUE
+-----
+İlk girenin ilk çıktığı veri yapısı (FIFO)
+
+PRIORITY_QUEUE
+--------------
+Önceliği yüksek olanın ilk başta çıktığı veri yapısı.
+
+
+
+
 ITERATORS
 =========
 iteratorler pointerların daha soyutlanmış hali. Containerlerın için konum tutan bir nesne. 

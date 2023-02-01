@@ -72,6 +72,8 @@ Bucket count arttırıldığı zaman tekrar öğeler konumlandırılacak ve reha
 max_load_factor : max_load_factor ne kadar büyük tutulursa re-hash gecikecek; En uygunu 0.7 0.8 arasında kullanmak. default değeri 1 olması biraz collision şansını arttırabiliyor.
 bucket count toplam bucket sayısı
 bucket.size her bucket için öğe sayısı
+
+reverse ve rehash fonksiyonları ile rehash işlemi yaptırılabilir. rehash fonksiyonu bucket sayısını, reserve fonksiyonu ise öge sayısını parametre olarak almaktadır.
 */
 
 #include<vector>
