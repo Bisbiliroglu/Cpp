@@ -9,7 +9,6 @@ Function object sınıflaır () operatörlerini overload eden sınıflardır. Bu
 
 plus<int>{} (10,20) çağrılan fonksiyon 10 ve 20'yi toplayarak geri döndürecek
 
-
 std::reference_wrapper
 ------------------
 rebindable : başka bir nesneye bağlanabilir
@@ -26,7 +25,6 @@ bind bir callable object döndürüyor. parametre olarak bir callable ve bu call
 Argman yerina std::placeholders::_1 veya std::placeholders::_2 gibi placeholderslar girilirse bu girilen placeholders için oluşturulan callable nesneye argüman geçilmesi gerekir.
 bind kendi içinde gönderilen argümanlar için kopyalama semantiği kulanır. reference semantiği kullanmak için  argümanların reference_wrapper ile sarmalanarak gönderilmesi gerekir.
 
-
 std::function
 --------------
 fonksiyon sarmalamak için  kulanılıyor
@@ -39,7 +37,6 @@ std::function nesneleri default initialize edilebiliyor. Ancak bu durumda herhan
 std::function nesnesinin bir şeyi sarmalayıp sarmalamadığını test etmek istenirise oeprator bool fonksiyonu kullanılabilir.
 std::function nesnesi boş ise fonksiyon çağrı operatörünün operandı yapılırsa exception throw eder.
 
-
 std::not_fn
 -----------
 Bir fonksiyon adaptörüdür. Bu fonksiyona bir callable gönderilirse bind gibi bir callable döndürür. 
@@ -51,6 +48,14 @@ std::mem_fn
 Bir fonksiyon adaptörüdür. Bu fonksiyona bir callable gönderilirse bind gibi bir callable döndürür. 
 Ancak argüman olarak aldığı callable bir sınıfın non-static üye fonksiyonunun adresidir. Buna göre bir funcion object döndürür. 
 std::mem_fn fonksiyonundan dönen callable'a bir sınıf nesnesi veya sınıf pointer'ı göndermek gerekiyor.
+
+std::invoke 
+------------
+CPP 17 ile eklendi. General bir callable invoker. Callable ve argümanları girilirse girilen callab eincoke eder. 
+Bir fonksiyon şablonu. İlk parametre olarak callable alır. Diğer parametreler ise peerfect forwarding ile fonksiyona geçilecek parametrelerdir. 
+Dönüş değeri argüman olarak geçilen fonksiyonun dönüş değeridir. 
+Eğer bir sınıfın üye fonksiyonu invoke edilecekse, invoke fonksiyonuna, callable'den sonra sınıf argüman olarak geçilmesi gerekmektedir. 
+
 
 */
 
