@@ -14,7 +14,7 @@ Dinamik ömürlü nesnelerin hayatını başlatmak için new operatörleri, sonl
 
 Not: Java C# gibi dillerde tüm nesneler dinamik olduğu için obje tanımlarken hep new kullanılır. ancak C++ için böyle bir zorunluluk yoktur.
 
-Setaks
+Sentaks
 -------
 new T
 delete T
@@ -26,7 +26,7 @@ Dinamik ömrülü nesnelerin işi bittiği zaman delete operatörü ile nesneler
 
 operator new ve operator delete fonksiyonları overload edilirse tüm new ve delete için overload edilmiş fonksiyonlar çağrılacak
 Ancak bir sınıf için new ve delete fonksiyonları overload edilirse sadece o sınıf için new ve delete ifadeleri değişmiş olur.
-Bir sınıf için new ve delete fonksiyonları overload edilirse static yapılması gerekmektedir. Zaten static keyword'u kullanılmasa dahi otomatik olarak bu fonksiyonlar statik olacaktır. 
+Bir sınıf için new ve delete fonksiyonları overload edilirse static yapılması gerekmektedir. Zaten static keyword'u kullanılmasa dahi otomatik olarak bu fonksiyonlar statik olacaktır.
 
 new ile allocation sürecinde bellek alanı alınmazsa hemen exception throw edilmez. new_handler fonksiyonunun sürekli çağrıldığı bir sonsuz döngüye girilir.
 Bunun amacı bu işlem sırasında programda farklı bir bellek alanı boşa çıkarsa o bellek alanını allocate etmketir.
