@@ -221,10 +221,6 @@ std::enable_if_t<std::is_integral_v<T>, T> func(T t)
 |                        | değerlendirir ve kodun çalışma zamanında çalışmasına        |                                                    |
 |                        | gerek kalmadan hesaplanmasına olanak tanır.                 |                                                    |
 +------------------------+-------------------------------------------------------------+----------------------------------------------------+
-
-
-
-
 */
 
 #include<iostream>
@@ -240,9 +236,7 @@ template<typename T>
 void func_impl(T x, std::false_type)
 {
     std::cout << "TAG Dispatch pointer olmayan turler icin implementasyon\n";
-
 }
-
 
 template<typename T>
 void func(T x)
@@ -250,8 +244,11 @@ void func(T x)
     func_impl(x, typename std::is_pointer<T>::type());
 }
 
+constexpr int factorial(int n) {return n == 0 ? 1 : n * factorial(n - 1);} 
+
 int main()
 {
+
     func(12);
     int* a;
     func(a);
@@ -290,5 +287,4 @@ int main()
     std::remove_reference<int&&>::type is int? 1
     std::remove_reference<const int&>::type is const int? 1
     */
-
 }
