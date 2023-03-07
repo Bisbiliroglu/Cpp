@@ -188,4 +188,34 @@ template <typename T = int, int a = 5>;
 Not: Modern C++ öncesinde sadece sınıf şablonları varsayılan argüman alabilirdi. Fonksiyon şablonlarının varsayılan argüman alması daha sonra eklendi. 
 
 
+Alias Template
+---------------
+Alias template, var olan bir template'in adının daha okunaklı ve açıklayıcı bir şekilde değiştirilmesine olanak tanıyan bir C++ özelliğidir. Alias template, özellikle uzun veya karmaşık template isimleri ile karşılaşıldığında kodun okunabilirliğini artırır.
+Alias template'in kullanımı, temel template ismi belirlendikten sonra "using" anahtar kelimesiyle belirlenen yeni bir isim verilmesiyle gerçekleştirilir. Aşağıdaki örnek, "vector" yerine "IntVector" olarak adlandırılan bir alias template oluşturur:
+
+Bu örnekte, "IntVector" adı "std::vector<int>" ile eşdeğerdir. Böylece, kodun okunabilirliği artırılır ve "std::vector<int>" yerine "IntVector" kullanarak kod yazmak daha kolay hale gelir.
+
+template<typename T>
+using IntVector = std::vector<int>;
+
+template <typename T>
+using IsPointer_t = typename std::is_pointer<T>::type;
+
+is_pointer_t<T> ile typename std::is_pointer<T>::type aynı 
+standard kütüphanesde "_t" son ekli templateler alias template için kullanılıyor.
+Ör: is_pointer_t<T>
+
+
+Variable Template
+------------------
+
+Daha önceden tanımlanmış bir template'in bir memberını compile time içerisinde değişken olarak tanımlanması için kullanılır.
+
+template<typename T>
+constexpr T pi = T(3.1415926535897932385);
+
+is_pointer_v<T> ile std::is_pointer<T>::value aynı 
+standard kütüphanesde "_v" son ekli templateler variable template için kullanılıyor.
+Ör: is_pointer_v<T>
+
 */

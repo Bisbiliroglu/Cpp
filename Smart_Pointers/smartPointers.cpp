@@ -74,6 +74,7 @@ weak_ptr
 weak_ptr bir shared_ptr'nin kaynağı sahip olup olmadığını gözlemlemek için kullanılıyor.
 weak_ptr shared_ptr'nin gösterdiği nesnenin gözlemcisi olarak kullanılabiliyor. Ancak referans sayacı artmıyor. weak_ptr dereference edilemiyor.
 bir weak_ptr, shared_ptr'den oluşturuluyor.
+weak_ptr'nin en çok kullanıldığı yer cyclic refernas engellemeleridir. 
 
 make fonksiyonları
 -------------------
@@ -130,7 +131,35 @@ expired
 -------
 sadece weak_ptr'de var. dönüş değeri bool. Eğer true ise izlenen shared_ptr kaynağı geri verildi (expired) anlamına gelir.
 
-
++--------------------+----------------------+--------------------------------------------------------------------------------+
+| Smart Pointer Type | Functions            | Explanation                                                                   |
++====================+======================+================================================================================+
+| std::unique_ptr    | get()                | Returns a pointer to the managed object                                          |
+|                    | reset()              | Resets the unique_ptr to manage a new object                                     |
+|                    | release()            | Releases ownership of the managed object and returns a pointer to it            |
+|                    | operator*()          | Dereferences the managed object                                                  |
+|                    | operator->()         | Accesses a member of the managed object                                           |
+|                    | operator bool()      | Checks if the unique_ptr is managing an object                                    |
++--------------------+----------------------+--------------------------------------------------------------------------------+
+| std::shared_ptr    | get()                | Returns a pointer to the managed object                                          |
+|                    | reset()              | Resets the shared_ptr to manage a new object                                     |
+|                    | use_count()          | Returns the number of shared_ptrs that share ownership of the managed object     |
+|                    | operator*()          | Dereferences the managed object                                                  |
+|                    | operator->()         | Accesses a member of the managed object                                           |
+|                    | operator bool()      | Checks if the shared_ptr is managing an object                                    |
++--------------------+----------------------+--------------------------------------------------------------------------------+
+| std::weak_ptr      | expired()            | Checks if the weak_ptr's underlying shared_ptr has expired                       |
+|                    | lock()               | Returns a shared_ptr that shares ownership with the weak_ptr or an empty shared_ptr if the underlying shared_ptr has expired |
+|                    | use_count()          | Returns the number of shared_ptrs that share ownership of the managed object     |
+|                    | operator bool()      | Checks if the weak_ptr's underlying shared_ptr is valid                           |
++--------------------+----------------------+--------------------------------------------------------------------------------+
+| std::auto_ptr      | get()                | Returns a pointer to the managed object                                          |
+|                    | reset()              | Resets the auto_ptr to manage a new object                                       |
+|                    | release()            | Releases ownership of the managed object and returns a pointer to it            |
+|                    | operator*()          | Dereferences the managed object                                                  |
+|                    | operator->()         | Accesses a member of the managed object                                           |
+|                    | operator bool()      | Checks if the auto_ptr is managing an object                                      |
++--------------------+----------------------+--------------------------------------------------------------------------------+
 
 */
 
