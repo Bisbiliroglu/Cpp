@@ -11,7 +11,7 @@ Bu overloading set içerisinden çıkarma işlemi türe göre compile zamanda ko
 */
 
 #include <type_traits>
-#include<iostream>
+#include <iostream>
 #include <vector>
 
 template<typename T, unsigned N>
