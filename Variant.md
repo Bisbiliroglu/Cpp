@@ -287,9 +287,9 @@ a
 */
 ```
 
-### Variant ve Kalıtım
+### Variant ve Polymorphism
 
-Variant kullanımı kalıtım için bir alternatif olarak kullanılabilir. 
+Variant kullanımı polymorphism için bir alternatif olarak kullanılabilir. 
 
 **Standart Kalırım Örneği:**
 
