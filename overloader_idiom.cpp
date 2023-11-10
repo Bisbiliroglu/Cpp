@@ -7,6 +7,10 @@ struct Overloader : Ts... // inherit classes by pack expantion
 	using Ts::operator()...; // to solve ambiguity 
 };
 
+template <typename... Ts> //deduction guide for cpp17 
+Overloader(Ts...) -> Overloader<Ts...>;
+
+
 class foo
 {
     public:
